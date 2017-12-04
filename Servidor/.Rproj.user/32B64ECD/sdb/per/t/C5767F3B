@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "library(rPython)\nlibrari\nFuncionFinal_KNN <- function(x){\n  python.load(\"D:/Proyecto tesis/KNN.py\")\n  python.call(\"Limpieza_KNN\")\n  KNN_FUNCION()  \n  }\n\n#cambiar directorio\nKNN_FUNCION <- function(){\n  data <- read.csv(\"D:/Proyecto tesis/data/data_knn.csv\",header=T, sep =';',stringsAsFactors = FALSE)\n  stringsAsFactors = FALSE \n  str(data)\n  as.numeric(data$c1) \n  library(class)\n  data$clasificacion <- factor(data$CLUSTER, levels = c(\"C1\", \"C2\", \"C3\", \"C4\", \"C5\"), labels = c(\"1\",\"2\",\"3\",\"4\",\"5\"))\n  round(prop.table(table(data$Cluster)) * 100, digits = 1) \n  data_n <- as.data.frame(lapply(data[2:6], normalize))\n  summary(data_n$radius)\n  data_train <- data_n[1:1500,]\n  data_test <- data_n[1501:1998,]\n  \n  data_train_labels <- data[1:1500, 6]\n  data_test_labels <- data[1501:1998, 6]\n  summary(data_n)\n  set.seed(123)\n  data_test_pred <- knn(train =data_train, test =  data_test, cl =  data_train_labels, k=3)\n  knn3 <- knn(train =data_train, test =  data_test,cl =  data_train_labels, k=3)\n  100 * sum(data_test_labels == knn3)/100\n  table(knn3, data_test_labels)\n  library(gmodels)\n  summary(data_test_pred)\n  CrossTable(x=data_test_labels, y= data_test_pred, prop.chisq = FALSE)\n  data_test_cluster = data[1501:1998,]\n  data_test_cluster = data_test_cluster[-2:-7]\n  write.table(data_test_cluster, file = \"D:/Proyecto tesis/Data/Informe_Final.csv\", sep = \";\", row.names=FALSE)\n  print('CSV CREADO!!!!********************************')\n  \n}\nKNN_FUNCION()\nFuncionFinal_KNN()\nnormalize <- function(x) {\n  return ((x - min(x)) / (max(x) - min(x))) }\n ",
+    "created" : 1512250572090.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1815865210",
+    "id" : "C5767F3B",
+    "lastKnownWriteTime" : 1512356713,
+    "last_content_update" : 1512356713890,
+    "path" : "D:/Proyecto tesis/Test2.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "\nlibrary(shiny)\n\n\nshinyServer(function(input, output, session) {  # You can access the value of the widget with input$file, e.g.\n  observeEvent(input$b1, {\n    \n    bcp_tweets <-  searchTwitter('latamairlines', n = 50)\n    tweets.df = ldply(bcp_tweets, function(t) t$toDataFrame())\n    write.csv(tweets.df$text, file = \"../data/Data_Original2.csv\")\n    RPTA='Tweets Extraidos correctamente'\n    session$sendCustomMessage(type = 'testmessage',\n                              message = RPTA)\n    \n  })\n  observeEvent(input$b2, {\n    FuncionFinal_svm()\n    session$sendCustomMessage(type = 'testmessage',\n                              message = 'Proceso Terminado (SVM)')\n  })\n  observeEvent(input$b3, {\n    FuncionFinal_KNN()\n    \n    output$distPlot <- renderPlot({\n      \n      #x    <- faithful$waiting\n      #bins <- seq(min(x), max(x), length.out = input$bins + 1)\n      inf_finak <- read.csv('D:/Proyecto tesis/Data/Informe_Final.csv', sep = ';', header = T)\n      x    <- inf_finak$clasificacion\n      bins <-inf_finak$clasificacion\n      hist(x, breaks = 5, col = \"#75AADB\", border = \"white\",\n           xlab = \"Histograma de frecuencias de los clusters\",\n           main = \"Clusters\")\n      \n    })\n    session$sendCustomMessage(type = 'testmessage',\n                              message = 'Proceso Terminado (KNN), Gráfico actualizado')\n  })\n\n\n})\n",
+    "created" : 1512152978434.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "820553872",
+    "id" : "C528883C",
+    "lastKnownWriteTime" : 1512359011,
+    "last_content_update" : 1512359011095,
+    "path" : "D:/Proyecto tesis/Servidor/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

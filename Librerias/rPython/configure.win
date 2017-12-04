@@ -1,0 +1,5 @@
+#!/bin/sh
+
+echo 'PKG_LIBS=-LC:/Python34/libs -lpython34'  > src/makevars.win
+echo 'PKG_CFLAGS=-I"C:/Python34/include"'     >> src/makevars.win
+

@@ -1,0 +1,2 @@
+PKG_LIBS=-LC:/Python34/libs -lpython34
+PKG_CFLAGS=-I"C:/Python34/include"

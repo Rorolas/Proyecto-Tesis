@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "Extraccion <- function(RPTA){\n  library(twitteR)\n  library (ROAuth)\n  library(httr)\n  library(devtools)\n  library(plyr)\n  library(corpus)\n  library(tm)\n  library(tmap)\n  library(SnowballC)\n  library(NLP)\n  \n  consumer_key <- 'gGbrR5p9xzmuPG73gkaAnhY6F'\n  consumer_secret <- 'EMKZWePzKpC5x9j52cODVmcg7GZTUTf24LmWldi9k53HeAGZ7U'\n  access_token <- '4742183426-GOFDXTnOToUb3S6q1Cd6hyguqUHhcsaFO56WhWn'\n  access_secret <- 'RJ9uwoO3Ta2tPZo5cLBovP14rGmAn23KoENdz1Mu0klUb'\n  setup_twitter_oauth(consumer_key, consumer_secret,access_token,access_secret)\n  bcp_tweets <-  searchTwitter('latamairlines', n = 50)\n  \n  tweets.df = ldply(bcp_tweets, function(t) t$toDataFrame())\n  write.csv(tweets.df$text, file = \"../data/Data_Original2.csv\")\n  RPTA='Tweets Extraidos correctamente'\n  return (RPTA)\n}\nExtraccion()\n\n",
+    "created" : 1512249796399.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4076238574",
+    "id" : "AB933B8D",
+    "lastKnownWriteTime" : 1512254023,
+    "last_content_update" : 1512254023539,
+    "path" : "D:/Proyecto tesis/Servidor/Extraccion.R",
+    "project_path" : "Extraccion.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#\n# This is the user-interface definition of a Shiny web application. You can\n# run the application by clicking 'Run App' above.\n#\n# Find out more about building applications with Shiny here:\n# \n#    http://shiny.rstudio.com/\n#\n\nlibrary(shiny)\n\n# Define UI for application that draws a histogram\nshinyUI(fluidPage(\n  tags$head(tags$script(src = \"message-handler.js\")),\n\n  \n  \n  sidebarLayout(\n sidebarPanel(\n   titlePanel(\"Sistema de analisis y clasificación LATAM\"),\n   hr(),\n   \n   p('1. Extraccion de los tweets'),\n   actionButton(\"b1\", label = \"Extraer los tweets\"),\n   hr(),\n   p('2. Analisis de Sentimiento (SVM)'),\n   actionButton(\"b2\", label = \"Procesar\"),\n   hr(),\n   p('3. Clasificación (KNN)'),\n   actionButton(\"b3\", label = \"Procesar\"),\n   hr()  \n    ),\n    mainPanel(\n      plotOutput(outputId = \"distPlot\")\n    \n    )\n  )\n)\n  \n)\n",
+    "created" : 1512355240649.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1840718496",
+    "id" : "D9B8C9FA",
+    "lastKnownWriteTime" : 1512358699,
+    "last_content_update" : 1512358699139,
+    "path" : "D:/Proyecto tesis/Servidor/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

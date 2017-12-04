@@ -1,0 +1,10 @@
+name: apptesis
+title:
+username:
+account: proyectotesisul
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 232523
+bundleId: 1110911
+url: https://proyectotesisul.shinyapps.io/apptesis/
+when: 1512242268.89763

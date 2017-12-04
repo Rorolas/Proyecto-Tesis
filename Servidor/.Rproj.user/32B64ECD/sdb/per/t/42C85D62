@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "install.packages(\"RJSONIO\")\ninstall.packages(\"devtools\")\ninstall(\"D:/Proyecto tesis/Librerias/rPython\")\n\n  \n\n\nFuncionFinal_svm <- function(x){\n  library(devtools)\n  library(NLP)\n  library(RJSONIO)\n  library(rPython)\n  require(rPython) \n  library(NLP)\n  library(tm)\n  library(ggplot2)\n  library(lattice)\n  library(caret)\n  python.load(\"D:/Proyecto tesis/SVM.py\")\n  python.call(\"Stemmer_SVM\")\n  data_original <- read.csv('D:/Proyecto tesis/Data/Data_Original.csv', sep = ';', header = T)\n  tweets <- read.csv('D:/Proyecto tesis/Data/Data_Stemmizada.csv', sep = ';', header = T)\n  tweets$Sentiment <- data_original$Sentiment\n  tweets$id <- data_original$id\n  colnames(tweets)[1] <- \"text\"\n  Algotirmo_svm(tweets = tweets)\n}\n\n\nAlgotirmo_svm <- function(tweets) {\n  stopWords <- read.csv('D:/Proyecto tesis/data/lista de stopwords.csv', header = F)\n  corpus = Corpus(VectorSource(tweets$text))\n  corpus_low <- tm_map(corpus, content_transformer(tolower))\n  length(corpus)\n  corpus <- corpus_low\n  corpus <- tm_map(corpus, removeWords, stopWords[,1])\n  corpus <- tm_map(corpus, removePunctuation)\n  frequencies <-  DocumentTermMatrix(corpus)\n  findFreqTerms(frequencies, lowfreq = 600)\n  sparse <- removeSparseTerms(frequencies, 0.995)\n  tweetsSparse <- as.data.frame(as.matrix(sparse))\n  colnames(tweetsSparse) = make.names(colnames(tweetsSparse))\n  tweetsSparse$sentiment <- tweets$Sentiment\n  tweetsSparse$id <- tweets$id\n  library(caTools)\n  set.seed(12)\n  split <- sample.split(tweetsSparse$sentiment, SplitRatio = 0.8334027836)\n  trainSparse <- subset(tweetsSparse, split == TRUE)\n  testSparse <- subset(tweetsSparse, split == FALSE)\n  library(e1071)\n  SVM <- svm(as.factor(sentiment)~.,data=trainSparse) \n  predict_SVM <- predict(SVM, newdata = testSparse)\n  confusionMatrix(predict_SVM, testSparse$sentiment)\n  aux <- as.character(predict_SVM)\n  Listafinal_id <- vector('integer') \n  Listafinal_tweet <- vector('integer')\n  Listafinal_Sentimiento <- aux\n  Listafinal_id <- testSparse$id\n  data_original <- read.csv('D:/Proyecto tesis/data/Data_Original.csv', sep = ';', header = T)\n  for(i in 1:length(Listafinal_id)){\n    Listafinal_tweet[i] = as.character(data_original$Texto[i])\n  }\n  ListaFinal <- cbind(Listafinal_tweet,Listafinal_id, Listafinal_Sentimiento)\n  \n  for(i in 1:length(Listafinal_id)){\n    print(data_original$Texto[i])\n    Listafinal_tweet[i] = as.character(data_original$Texto[i])\n  }\n  write.table(ListaFinal, file = \"D:/Proyecto tesis/Data/Data_svm_id.csv\", sep = \";\", row.names=FALSE, col.names = F)\n  print('CSV CREADO, OK!!!')\n}\n#EJECUTAR***************************************\nFuncionFinal_svm()\n\n",
+    "created" : 1512250568426.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3783130363",
+    "id" : "42C85D62",
+    "lastKnownWriteTime" : 1512255283,
+    "last_content_update" : 1512255283002,
+    "path" : "D:/Proyecto tesis/Test1.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
